@@ -40,6 +40,10 @@ autodoc_member_order = "bysource"
 
 add_module_names = False
 
+autodoc_default_flags = [
+    "undoc-members",
+]
+
 # -- Options for intersphinx -------------------------------------------------
 
 intersphinx_mapping = {

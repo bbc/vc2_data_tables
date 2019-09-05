@@ -1,4 +1,4 @@
-SMPTE ST 2042-2 (VC-2) Constants and Data Tables
+SMPTE ST 2042-1 (VC-2) Constants and Data Tables
 ================================================
 
 **This repository is a work-in-progress.**

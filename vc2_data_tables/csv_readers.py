@@ -6,6 +6,8 @@ Internal CSV table unpacking routines
 
 These routines are used to load and parse constants and tables of values from
 CSV files into :py:class:`~enum.IntEnum` enums and dictionary-based tables.
+
+See the documentation for an overview of the CSV conventions used.
 """
 
 import re
