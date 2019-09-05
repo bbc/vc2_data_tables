@@ -1,4 +1,4 @@
-# VC-2 Levels (see also permitted_parameters.csv),,
+# VC-2 Levels,,
 ,# Used as enum names,# Used in error messages
 index,name,standard
 # Generalized levels,,
