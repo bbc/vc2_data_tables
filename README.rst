@@ -37,6 +37,12 @@ Then run the tests::
 
     $ pytest tests/
 
+To automatically run the test suite under several versions of Python ``tox``
+may be used::
+
+    $ pip install tox
+    $ tox
+
 
 Documentation
 -------------
