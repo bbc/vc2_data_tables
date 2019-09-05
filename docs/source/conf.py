@@ -41,6 +41,7 @@ autodoc_member_order = "bysource"
 add_module_names = False
 
 autodoc_default_flags = [
+    "members",
     "undoc-members",
 ]
 

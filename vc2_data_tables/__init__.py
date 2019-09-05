@@ -56,19 +56,15 @@ As an example, the snippet below looks up the frame size of the Digital Cinema
     :annotation: = int
 
 .. autoclass:: ParseCodes(IntEnum)
-    :members:
 
 (11) Picture coding mode identifiers
 ------------------------------------
 
 .. autoclass:: PictureCodingModes(IntEnum)
-    :members:
 
 .. autoclass:: ColorDifferenceSamplingFormats(IntEnum)
-    :members:
 
 .. autoclass:: SourceSamplingModes(IntEnum)
-    :members:
 
 (11.4.6) Preset frame rates
 ---------------------------
@@ -77,7 +73,6 @@ As an example, the snippet below looks up the frame size of the Digital Cinema
     :annotation: = {PresetFrameRates: FrameRate, ...}
 
 .. autoclass:: PresetFrameRates(IntEnum)
-    :members:
 
 .. autoclass:: FrameRate
 
@@ -88,7 +83,6 @@ As an example, the snippet below looks up the frame size of the Digital Cinema
     :annotation: = {PresetPixelAspectRatios: PixelAspectRatio, ...}
 
 .. autoclass:: PresetPixelAspectRatios(IntEnum)
-    :members:
 
 .. autoclass:: PixelAspectRatio
 
@@ -99,7 +93,6 @@ As an example, the snippet below looks up the frame size of the Digital Cinema
     :annotation: = {PresetSignalRanges: SignalRangeParameters, ...}
 
 .. autoclass:: PresetSignalRanges(IntEnum)
-    :members:
 
 .. autoclass:: SignalRangeParameters
 
@@ -110,7 +103,6 @@ As an example, the snippet below looks up the frame size of the Digital Cinema
     :annotation: = {PresetColorPrimaries: ColorPrimariesParameters, ...}
 
 .. autoclass:: PresetColorPrimaries(IntEnum)
-    :members:
 
 .. autoclass:: ColorPrimariesParameters
 
@@ -121,7 +113,6 @@ As an example, the snippet below looks up the frame size of the Digital Cinema
     :annotation: = {PresetColorMatrices: PresetColorMatrices, ...}
 
 .. autoclass:: PresetColorMatrices(IntEnum)
-    :members:
 
 .. autoclass:: ColorMatrixParameters
 
@@ -132,7 +123,6 @@ As an example, the snippet below looks up the frame size of the Digital Cinema
     :annotation: = {PresetTransferFunctions: TransferFunctionParameters, ...}
 
 .. autoclass:: PresetTransferFunctions(IntEnum)
-    :members:
 
 .. autoclass:: TransferFunctionParameters
 
@@ -143,7 +133,6 @@ As an example, the snippet below looks up the frame size of the Digital Cinema
     :annotation: = {PresetColorSpecs: ColorSpecificiation, ...}
 
 .. autoclass:: PresetColorSpecs(IntEnum)
-    :members:
 
 .. autoclass:: ColorSpecificiation
 
@@ -154,7 +143,6 @@ As an example, the snippet below looks up the frame size of the Digital Cinema
     :annotation: = {BaseVideoFormats: BaseVideoFormatParameters, ...}
 
 .. autoclass:: BaseVideoFormats(IntEnum)
-    :members:
 
 .. autoclass:: BaseVideoFormatParameters
 
@@ -165,14 +153,12 @@ As an example, the snippet below looks up the frame size of the Digital Cinema
     :annotation: = {WaveletFilters: LiftingFilterParameters, ...}
 
 .. autoclass:: WaveletFilters(IntEnum)
-    :members:
 
 .. autoclass:: LiftingFilterParameters
 
 .. autoclass:: LiftingStage
 
 .. autoclass:: LiftingFilterTypes(IntEnum)
-    :members:
 
 (C.2) Profiles
 --------------
@@ -181,7 +167,6 @@ As an example, the snippet below looks up the frame size of the Digital Cinema
     :annotation: = {Profiles: ProfileParameters, ...}
 
 .. autoclass:: Profiles(IntEnum)
-    :members:
 
 .. autoclass:: ProfileParameters
 
@@ -204,7 +189,6 @@ As an example, the snippet below looks up the frame size of the Digital Cinema
     :annotation: = {Levels: LevelParameters, ...}
 
 .. autoclass:: Levels(IntEnum)
-    :members:
 
 .. autoclass:: LevelParameters
 
@@ -371,7 +355,7 @@ PresetPixelAspectRatios.__doc__ = """
 """
 
 PixelAspectRatio = namedtuple("PixelAspectRatio", "numerator,denominator")
-PixelAspectRatio.__doc__ = """
+"""
 (11.4.7) Pixel aspect ratio preset indices from (Table 11.4).
 """
 
