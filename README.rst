@@ -13,7 +13,7 @@ Installation
 ------------
 
 (**Coming soon...**) You can install the ``vc2_data_tables`` Python module from
-`PyPI <https://pypi.org/>` using::
+`PyPI <https://pypi.org/>`_ using::
 
     $ pip install vc2_data_tables
 
@@ -64,5 +64,5 @@ Author
 ------
 
 This module is currently being developed by `Jonathan Heathcote
-<mailto:jonathan.heathcote@bbc.co.uk>` from BBC R&D as part of a project to
+<mailto:jonathan.heathcote@bbc.co.uk>`_ from BBC R&D as part of a project to
 refresh VC-2's conformance testing procedures.
