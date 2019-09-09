@@ -26,7 +26,7 @@ setup(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 3",
     ],
-    keywords="smpte-RP-2042-3 vc2 dirac dirac-pro constants data-tables quantisation-matrix bit-width",
+    keywords="smpte-RP-2042-3 vc2 dirac dirac-pro constants data-tables quantisation-matrix",
     install_requires=["enum34"],
     entry_points = {
         'console_scripts': [],
