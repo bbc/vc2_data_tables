@@ -2,6 +2,8 @@
 
 import pytest
 
+import os
+
 from collections import namedtuple
 
 from enum import IntEnum
@@ -19,6 +21,11 @@ from vc2_data_tables.csv_readers import (
 )
 
 
+sample_table_filename = os.path.join(os.path.dirname(__file__), "sample_table.csv")
+
+sample_quantisation_matrices_filename = os.path.join(os.path.dirname(__file__), "sample_quantisation_matrices.csv")
+
+
 def test_is_ditto():
     # NB: This is intentionally not marked as a unicode string so in Python 2.7
     # this will be interpreted as bytes -- as these characters will be if read
@@ -31,12 +38,12 @@ def test_is_ditto():
 
 
 def test_read_csv_without_comments():
-    lines = read_csv_without_comments("test_table.csv")
+    lines = read_csv_without_comments(sample_table_filename)
     assert [l["index"] for l in lines] == ["1", "2", "", "", "3"]
 
 
 def test_read_enum_from_csv():
-    Test = read_enum_from_csv("test_table.csv", "Test")
+    Test = read_enum_from_csv(sample_table_filename, "Test")
     
     assert Test.__name__ == "Test"
     
@@ -50,12 +57,12 @@ class TestReadLookupFromCSV(object):
     
     @pytest.fixture
     def Test(self):
-        return read_enum_from_csv("test_table.csv", "Test")
+        return read_enum_from_csv(sample_table_filename, "Test")
     
     def test_simple(self, Test):
         TestTuple = namedtuple("TestTuple", "value0,value1")
         
-        lookup = read_lookup_from_csv("test_table.csv", Test, TestTuple)
+        lookup = read_lookup_from_csv(sample_table_filename, Test, TestTuple)
         
         assert lookup == {
             Test.one: TestTuple("1 (one)", "100"),
@@ -67,7 +74,7 @@ class TestReadLookupFromCSV(object):
         TestTuple = namedtuple("TestTuple", "value1,value2")
         
         lookup = read_lookup_from_csv(
-            "test_table.csv",
+            sample_table_filename,
             Test, TestTuple,
             type_conversions={"value1": int},
         )
@@ -81,7 +88,7 @@ class TestReadLookupFromCSV(object):
     def test_keeping_value_from_last_row_when_absent(self, Test):
         TestTuple = namedtuple("TestTuple", "value3")
         
-        lookup = read_lookup_from_csv("test_table.csv", Test, TestTuple)
+        lookup = read_lookup_from_csv(sample_table_filename, Test, TestTuple)
         
         assert lookup == {
             Test.one: TestTuple(""),
@@ -127,7 +134,7 @@ def test_to_dict_value(string, exp_value):
 
 
 def test_read_qauntisation_matrices_from_csv():
-    qm = read_quantisation_matrices_from_csv("test_quantisation_matrices.csv")
+    qm = read_quantisation_matrices_from_csv(sample_quantisation_matrices_filename)
     
     assert qm == {
         (1, 2, 1, 3): {

@@ -197,6 +197,8 @@ As an example, the snippet below looks up the frame size of the Digital Cinema
 
 from vc2_data_tables.version import __version__
 
+import os
+
 from enum import IntEnum
 
 from collections import namedtuple
@@ -254,6 +256,14 @@ __all__ = [
     "Levels",
     "LEVELS",
 ]
+
+def csv_path(csv_filename):
+    """
+    Given a CSV filename in the ``vc2_data_tables/csv/`` directory, returns a
+    complete path to that file.
+    """
+    return os.path.join(os.path.dirname(__file__), "csv", csv_filename)
+
 
 ################################################################################
 # (10.5) Parse Info Block
@@ -323,14 +333,14 @@ numerator : int
 denominator : int
 """
 
-PresetFrameRates = read_enum_from_csv("preset_frame_rates.csv", "PresetFrameRates")
+PresetFrameRates = read_enum_from_csv(csv_path("preset_frame_rates.csv"), "PresetFrameRates")
 PresetFrameRates.__doc__ = """
 (11.4.6) Preset framerate indices from (Table 11.1).
 """
 
 PRESET_FRAME_RATES = (
     read_lookup_from_csv(
-        "preset_frame_rates.csv",
+        csv_path("preset_frame_rates.csv"),
         PresetFrameRates,
         FrameRate,
         type_conversions={
@@ -349,7 +359,7 @@ PRESET_FRAME_RATES = (
 # (11.4.7) Preset pixel aspect ratios
 ################################################################################
 
-PresetPixelAspectRatios = read_enum_from_csv("preset_pixel_aspect_ratios.csv", "PresetPixelAspectRatios")
+PresetPixelAspectRatios = read_enum_from_csv(csv_path("preset_pixel_aspect_ratios.csv"), "PresetPixelAspectRatios")
 PresetPixelAspectRatios.__doc__ = """
 (11.4.7) Pixel aspect ratio preset indices from (Table 11.4).
 """
@@ -361,7 +371,7 @@ PixelAspectRatio = namedtuple("PixelAspectRatio", "numerator,denominator")
 
 PRESET_PIXEL_ASPECT_RATIOS = (
     read_lookup_from_csv(
-        "preset_pixel_aspect_ratios.csv",
+        csv_path("preset_pixel_aspect_ratios.csv"),
         PresetPixelAspectRatios,
         PixelAspectRatio,
         type_conversions={
@@ -380,7 +390,7 @@ PRESET_PIXEL_ASPECT_RATIOS = (
 # (11.4.9) Signal ranges
 ################################################################################
 
-PresetSignalRanges = read_enum_from_csv("preset_signal_ranges.csv", "PresetSignalRanges")
+PresetSignalRanges = read_enum_from_csv(csv_path("preset_signal_ranges.csv"), "PresetSignalRanges")
 PresetSignalRanges.__doc__ = """
 (11.4.9) Signal offsets/ranges preset indices from (Table 11.5).
 """
@@ -404,7 +414,7 @@ color_diff_excursion
 
 PRESET_SIGNAL_RANGES = (
     read_lookup_from_csv(
-        "preset_signal_ranges.csv",
+        csv_path("preset_signal_ranges.csv"),
         PresetSignalRanges,
         SignalRangeParameters,
         type_conversions={
@@ -424,7 +434,7 @@ PRESET_SIGNAL_RANGES = (
 # (11.4.10.2) Color Primaries
 ################################################################################
 
-PresetColorPrimaries = read_enum_from_csv("preset_color_primaries.csv", "PresetColorPrimaries")
+PresetColorPrimaries = read_enum_from_csv(csv_path("preset_color_primaries.csv"), "PresetColorPrimaries")
 PresetColorPrimaries.__doc__ = """
 (11.4.10.2) Color primaries from (Table 11.7).
 """
@@ -441,7 +451,7 @@ specification : str
 
 PRESET_COLOR_PRIMARIES = (
     read_lookup_from_csv(
-        "preset_color_primaries.csv",
+        csv_path("preset_color_primaries.csv"),
         PresetColorPrimaries,
         ColorPrimariesParameters,
     )
@@ -457,7 +467,7 @@ PRESET_COLOR_PRIMARIES = (
 # (11.4.10.3) Color Matrices
 ################################################################################
 
-PresetColorMatrices = read_enum_from_csv("preset_color_matrices.csv", "PresetColorMatrices")
+PresetColorMatrices = read_enum_from_csv(csv_path("preset_color_matrices.csv"), "PresetColorMatrices")
 PresetColorMatrices.__doc__ = """
 (11.4.10.3) Color matrices from (Table 11.8).
 """
@@ -476,7 +486,7 @@ color_matrix
 
 PRESET_COLOR_MATRICES = (
     read_lookup_from_csv(
-        "preset_color_matrices.csv",
+        csv_path("preset_color_matrices.csv"),
         PresetColorMatrices,
         ColorMatrixParameters,
     )
@@ -490,7 +500,7 @@ PRESET_COLOR_MATRICES = (
 # (11.4.10.4) Transfer functions
 ################################################################################
 
-PresetTransferFunctions = read_enum_from_csv("preset_transfer_functions.csv", "PresetTransferFunctions")
+PresetTransferFunctions = read_enum_from_csv(csv_path("preset_transfer_functions.csv"), "PresetTransferFunctions")
 PresetTransferFunctions.__doc__ = """
 (11.4.10.4) Transfer functions from (Table 11.9).
 """
@@ -507,7 +517,7 @@ specification
 
 PRESET_TRANSFER_FUNCTIONS = (
     read_lookup_from_csv(
-        "preset_transfer_functions.csv",
+        csv_path("preset_transfer_functions.csv"),
         PresetTransferFunctions,
         TransferFunctionParameters,
     )
@@ -521,7 +531,7 @@ PRESET_TRANSFER_FUNCTIONS = (
 # (11.4.10.1) Colour specifications
 ################################################################################
 
-PresetColorSpecs = read_enum_from_csv("preset_color_specs.csv", "PresetColorSpecs")
+PresetColorSpecs = read_enum_from_csv(csv_path("preset_color_specs.csv"), "PresetColorSpecs")
 PresetColorSpecs.__doc__ = """
 (11.4.10.1) Preset color specification collections from (Table 11.6).
 """
@@ -542,7 +552,7 @@ transfer_function
 
 PRESET_COLOR_SPECS = (
     read_lookup_from_csv(
-        "preset_color_specs.csv",
+        csv_path("preset_color_specs.csv"),
         PresetColorSpecs,
         ColorSpecificiation,
         type_conversions={
@@ -562,7 +572,7 @@ PRESET_COLOR_SPECS = (
 # (11.3) Base Video Formats
 ################################################################################
 
-BaseVideoFormats = read_enum_from_csv("base_video_format_parameters.csv", "BaseVideoFormats")
+BaseVideoFormats = read_enum_from_csv(csv_path("base_video_format_parameters.csv"), "BaseVideoFormats")
 BaseVideoFormats.__doc__ = """
 (11.3) Base video format indices from (Table 11.1).
 """
@@ -614,7 +624,7 @@ color_spec_index
 
 BASE_VIDEO_FORMAT_PARAMETERS = (
     read_lookup_from_csv(
-        "base_video_format_parameters.csv",
+        csv_path("base_video_format_parameters.csv"),
         BaseVideoFormats,
         BaseVideoFormatParameters,
         type_conversions={
@@ -771,7 +781,7 @@ LIFTING_FILTERS = {
 # (C.2) Profiles
 ################################################################################
 
-Profiles = read_enum_from_csv("profiles.csv", "Profiles")
+Profiles = read_enum_from_csv(csv_path("profiles.csv"), "Profiles")
 Profiles.__doc__ = """
 (C.2) VC-2 profile identifiers.
 """
@@ -788,7 +798,7 @@ allowed_parse_codes
 
 PROFILES = (
     read_lookup_from_csv(
-        "profiles.csv",
+        csv_path("profiles.csv"),
         Profiles,
         ProfileParameters,
         type_conversions={
@@ -805,7 +815,7 @@ The list of supported profiles from (C.2). Lookup from :py:class:`Profiles` to
 # (D) Quantisation matrices
 ################################################################################
 
-QUANTISATION_MATRICES = read_quantisation_matrices_from_csv("quantisation_matrices.csv")
+QUANTISATION_MATRICES = read_quantisation_matrices_from_csv(csv_path("quantisation_matrices.csv"))
 """
 The preset quantisation matrices from (Table D.1) to (Table D.8)
 
@@ -827,7 +837,7 @@ Where:
 # (ST 2042-2) Levels
 ################################################################################
 
-Levels = read_enum_from_csv("levels.csv", "Levels")
+Levels = read_enum_from_csv(csv_path("levels.csv"), "Levels")
 Levels.__doc__ = """
 (ST 2042-2:2017: 5.2) VC-2 level identifiers.
 """
@@ -843,7 +853,7 @@ standard : str
 """
 
 LEVELS = (
-    read_lookup_from_csv("levels.csv", Levels, LevelParameters)
+    read_lookup_from_csv(csv_path("levels.csv"), Levels, LevelParameters)
 )
 """
 The list of supported levels from (ST 2042-2:2017: 5.2). A lookup from

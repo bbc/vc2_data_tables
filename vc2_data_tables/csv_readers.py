@@ -11,7 +11,6 @@ See the documentation for an overview of the CSV conventions used.
 """
 
 import re
-import os
 import csv
 
 from enum import IntEnum
@@ -66,22 +65,12 @@ def is_ditto(string):
     
     return quotes_removed != string and len(quotes_removed.strip()) == 0
 
-def csv_path(csv_filename):
-    """
-    Given a CSV filename in the ``vc2_data_tables/csv/`` directory, returns
-    a complete path to that file.
-    """
-    return os.path.join(os.path.dirname(__file__), "csv", csv_filename)
-
 
 def read_csv_without_comments(csv_filename):
     """
-    Given a CSV filename in the ``vc2_conformance/tables/`` directory, returns
-    a list of dictionaries, one per row, containing the values in the CSV (as
-    read by :py:class:`csv.DictReader`).
+    Given a CSV, returns a list of dictionaries, one per row, containing the
+    values in the CSV (as read by :py:class:`csv.DictReader`).
     """
-    csv_filename = csv_path(csv_filename)
-    
     # Find the first non-empty/comment row in the CSV
     with open(csv_filename) as f:
         for first_non_empty_row, cells in enumerate(csv.reader(f)):
@@ -107,9 +96,8 @@ def read_enum_from_csv(csv_filename, enum_name):
     Parameters
     ==========
     csv_filename : str
-        Filename of the CSV file to read (relative to the
-        vc2_conformance/tables directory). Column headings will be read from
-        the first row which isn't empty or contains only '#' prefixed values.
+        Filename of the CSV file to read. Column headings will be read from the
+        first row which isn't empty or contains only '#' prefixed values.
     enum_name : str
         The name of the :py:class:`IntEnum` class to be created.
     
@@ -150,8 +138,7 @@ def read_lookup_from_csv(
     Parameters
     ==========
     csv_filename : str
-        Filename of the CSV file to read (relative to the
-        vc2_conformance/tables directory). Column headings will be read from
+        Filename of the CSV file to read. Column headings will be read from
         the first row which isn't empty or contains only '#' prefixed values.
     index_enum_type : :py:class:`enum.IntEnum`
         The :py:class:`enum.IntEnum` which enumerates all of the valid index
@@ -264,8 +251,7 @@ def read_quantisation_matrices_from_csv(csv_filename):
     Parameters
     ==========
     csv_filename : str
-        Filename of the CSV file to read (relative to the
-        vc2_conformance/tables directory).
+        Filename of the CSV file to read.
     
     Returns
     =======
