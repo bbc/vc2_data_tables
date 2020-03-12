@@ -439,12 +439,14 @@ PresetColorPrimaries.__doc__ = """
 (11.4.10.2) Color primaries from (Table 11.7).
 """
 
-ColorPrimariesParameters = namedtuple("ColorPrimariesParameters", "specification,")
+ColorPrimariesParameters = namedtuple("ColorPrimariesParameters", "name,specification,")
 """
 (11.4.10.2) A color primaries description.
 
 Parameters
 ==========
+name
+    Informative name.
 specification : str
     The name of the specification defining the primaries in use.
 """
@@ -472,12 +474,14 @@ PresetColorMatrices.__doc__ = """
 (11.4.10.3) Color matrices from (Table 11.8).
 """
 
-ColorMatrixParameters = namedtuple("ColorMatrixParameters", "specification,color_matrix")
+ColorMatrixParameters = namedtuple("ColorMatrixParameters", "name,specification,color_matrix")
 """
 An entry in (Table 11.8)
 
 Parameters
 ----------
+name
+    Informative name.
 specification
     Normative specification name.
 color_matrix
@@ -505,12 +509,14 @@ PresetTransferFunctions.__doc__ = """
 (11.4.10.4) Transfer functions from (Table 11.9).
 """
 
-TransferFunctionParameters = namedtuple("TransferFunctionParameters", "specification,")
+TransferFunctionParameters = namedtuple("TransferFunctionParameters", "name,specification,")
 """
 An entry in (Table 11.9)
 
 Parameters
 ----------
+name
+    Informative name.
 specification
     Normative specification name.
 """
