@@ -4,6 +4,8 @@ import pytest
 
 import os
 
+import pickle
+
 from collections import namedtuple
 
 from enum import IntEnum
@@ -42,15 +44,35 @@ def test_read_csv_without_comments():
     assert [l["index"] for l in lines] == ["1", "2", "", "", "3"]
 
 
+SampleEnum = read_enum_from_csv(sample_table_filename, "SampleEnum")
+
+
+class OuterClass(object):
+    
+    NestedEnum = read_enum_from_csv(
+        sample_table_filename,
+        "NestedEnum",
+        qualname="OuterClass.NestedEnum",
+    )
+
+
 def test_read_enum_from_csv():
-    Test = read_enum_from_csv(sample_table_filename, "Test")
+    assert SampleEnum.__name__ == "SampleEnum"
     
-    assert Test.__name__ == "Test"
+    assert len(SampleEnum) == 3
+    assert SampleEnum.one == 1
+    assert SampleEnum.two == 2
+    assert SampleEnum.three == 3
     
-    assert len(Test) == 3
-    assert Test.one == 1
-    assert Test.two == 2
-    assert Test.three == 3
+    # Check pickling
+    unpickled_one = pickle.loads(pickle.dumps(SampleEnum.one))
+    assert unpickled_one == SampleEnum.one
+    assert type(unpickled_one) is SampleEnum
+    
+    # Check pickling
+    unpickled_one = pickle.loads(pickle.dumps(OuterClass.NestedEnum.one))
+    assert unpickled_one == OuterClass.NestedEnum.one
+    assert type(unpickled_one) is OuterClass.NestedEnum
 
 
 class TestReadLookupFromCSV(object):
@@ -109,6 +131,7 @@ def test_to_list(string, exp_list):
 class MyEnum(IntEnum):
     foo = 123
     bar = 321
+
 
 @pytest.mark.parametrize("string,exp_value", [
     ("123", MyEnum.foo),

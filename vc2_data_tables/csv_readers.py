@@ -12,6 +12,7 @@ See the documentation for an overview of the CSV conventions used.
 
 import re
 import csv
+import sys
 
 from enum import IntEnum
 
@@ -86,7 +87,7 @@ def read_csv_without_comments(csv_filename):
         return list(csv.DictReader(f))
 
 
-def read_enum_from_csv(csv_filename, enum_name):
+def read_enum_from_csv(csv_filename, enum_name, module=None, qualname=None):
     """
     Create a :py:class:`IntEnum` class from the values listed in a CSV file.
     
@@ -100,6 +101,13 @@ def read_enum_from_csv(csv_filename, enum_name):
         first row which isn't empty or contains only '#' prefixed values.
     enum_name : str
         The name of the :py:class:`IntEnum` class to be created.
+    module : module
+        (Optional) The Python module the returned enum will be defined in.
+        Defaults to the caller's module (if this can be inferred
+        automatically).
+    qualname : str
+        (Optional) Gives the fully qualified name of the enum type in its
+        containing module.
     
     Returns
     =======
@@ -119,7 +127,23 @@ def read_enum_from_csv(csv_filename, enum_name):
         
         enum_values[name] = index
     
-    return IntEnum(enum_name, enum_values)
+    
+    if module is None:
+        # Detect the module of the caller by inspecting the stack. This is a
+        # bit gross, and won't work under all Python interpreters, but is what
+        # enum.Enum also has to do and if its good enough for the stdlib, its
+        # good enough for this...
+        try:
+            module = sys._getframe(1).f_globals["__name__"]
+        except (AttributeError, ValueError, KeyError):
+            pass
+    
+    return IntEnum(
+        enum_name,
+        enum_values,
+        module=module,
+        qualname=qualname,
+    )
 
 
 def read_lookup_from_csv(
