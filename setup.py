@@ -1,6 +1,13 @@
+import os
+
 from setuptools import setup, find_packages
 
-with open("vc2_data_tables/version.py", "r") as f:
+version_file = os.path.join(
+    os.path.dirname(__file__),
+    "vc2_data_tables",
+    "version.py",
+)
+with open(version_file, "r") as f:
     exec(f.read())
 
 setup(
