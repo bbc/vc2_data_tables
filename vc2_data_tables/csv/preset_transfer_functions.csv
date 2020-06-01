@@ -5,5 +5,5 @@ index,name,specification
 1,extended_gamut,ITU-R BT.1361 (suppressed)
 2,linear,Linear
 3,d_cinema,SMPTE ST 428-1
-4,perceptual_quality,ITU-R BT.2100
+4,perceptual_quantizer,ITU-R BT.2100
 5,hybrid_log_gamma,ITU-R BT.2100
