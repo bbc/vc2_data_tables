@@ -1,9 +1,4 @@
 """
-.. py.module: vc2_data_tables
-
-The ``vc2_data_tables`` Python module
-=====================================
-
 The :py:mod:`vc2_data_tables` module defines a number of constants and tables
 based on values published in the SMPTE ST 2042-series of standards documents.
 References to the standard are shown in brackets and, unless otherwise stated,
@@ -616,7 +611,7 @@ top_field_first
 frame_rate_index
     The frame rate, one of the indices of PRESET_FRAME_RATES.
 pixel_aspect_ratio_index
-    The pixel aspect ratio, an entry from the enum :py:class`PresetPixelAspectRatios`.
+    The pixel aspect ratio, an entry from the enum :py:class:`PresetPixelAspectRatios`.
 clean_width
 clean_height
 left_offset

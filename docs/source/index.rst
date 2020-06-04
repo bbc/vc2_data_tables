@@ -17,5 +17,5 @@ documentation.
    :maxdepth: 2
    :caption: Contents:
    
-   api
-   csv_files
+   api.rst
+   csv_files.rst

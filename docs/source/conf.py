@@ -62,4 +62,21 @@ html_static_path = ["_static"]
 
 latex_elements = {
     "papersize": "a4paper",
+    # Add an 'Introduction' chapter heading to the content which appears before
+    # all of the main chapters.
+    "tableofcontents": r"""
+        \sphinxtableofcontents
+        \chapter{Introduction}
+    """,
+    # Make index entries smaller since some are quite long
+    "printindex": r"\footnotesize\raggedright\printindex",
 }
+
+# Show page numbers in references
+latex_show_pagerefs = True
+
+# Show hyperlink URLs in footnotes
+latex_show_urls = "footnote"
+
+# Don't include a module index (the main index should be sufficient)
+latex_domain_indices = False

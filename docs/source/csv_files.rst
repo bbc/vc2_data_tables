@@ -13,10 +13,10 @@ be relatively human-readable.
 
 .. tip::
 
-    After opening the CSV files included with this module it is often helpful
-    to reset the width of all columns to a fixed size. This is because may
-    files will contain comments which cause certain columns to be assigned very
-    large sizes (see section about comments below).
+    After opening the CSV files included with this module with a spreadsheet
+    package it is often helpful to reset the width of all columns to a fixed
+    size. This is because may files will contain comments which cause certain
+    columns to be assigned very large sizes (see section about comments below).
 
 .. warning::
 
