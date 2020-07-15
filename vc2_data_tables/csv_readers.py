@@ -87,7 +87,7 @@ def read_csv_without_comments(csv_filename):
         return list(csv.DictReader(f))
 
 
-def read_enum_from_csv(csv_filename, enum_name, module=None, qualname=None):
+def read_enum_from_csv(csv_filename, enum_name, module=None):
     """
     Create a :py:class:`IntEnum` class from the values listed in a CSV file.
     
@@ -105,9 +105,6 @@ def read_enum_from_csv(csv_filename, enum_name, module=None, qualname=None):
         (Optional) The Python module the returned enum will be defined in.
         Defaults to the caller's module (if this can be inferred
         automatically).
-    qualname : str
-        (Optional) Gives the fully qualified name of the enum type in its
-        containing module.
     
     Returns
     =======
@@ -142,7 +139,6 @@ def read_enum_from_csv(csv_filename, enum_name, module=None, qualname=None):
         enum_name,
         enum_values,
         module=module,
-        qualname=qualname,
     )
 
 

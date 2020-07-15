@@ -47,15 +47,6 @@ def test_read_csv_without_comments():
 SampleEnum = read_enum_from_csv(sample_table_filename, "SampleEnum")
 
 
-class OuterClass(object):
-    
-    NestedEnum = read_enum_from_csv(
-        sample_table_filename,
-        "NestedEnum",
-        qualname="OuterClass.NestedEnum",
-    )
-
-
 def test_read_enum_from_csv():
     assert SampleEnum.__name__ == "SampleEnum"
     
@@ -68,11 +59,6 @@ def test_read_enum_from_csv():
     unpickled_one = pickle.loads(pickle.dumps(SampleEnum.one))
     assert unpickled_one == SampleEnum.one
     assert type(unpickled_one) is SampleEnum
-    
-    # Check pickling
-    unpickled_one = pickle.loads(pickle.dumps(OuterClass.NestedEnum.one))
-    assert unpickled_one == OuterClass.NestedEnum.one
-    assert type(unpickled_one) is OuterClass.NestedEnum
 
 
 class TestReadLookupFromCSV(object):
