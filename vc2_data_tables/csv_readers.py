@@ -31,6 +31,21 @@ __all__ = [
 ]
 
 
+def open_utf8(filename):
+    """
+    Open a UTF-8 text file for reading.
+
+    Under Python 2, the file is intentionally opened with no encoding specified
+    (files are treated as byte strings). Under Python 3, the file will be
+    forced to be opened as UTF-8, regardless of the platform default (e.g.
+    typically something silly under Windows).
+    """
+    if sys.version_info < (3, 0, 0):
+        return open(filename)
+    else:
+        return open(filename, encoding="utf-8")
+
+
 QUOTE_CHARS = [
     '"',  # ASCII double quote
     "“",  # Unicode double opening quote
@@ -73,13 +88,13 @@ def read_csv_without_comments(csv_filename):
     values in the CSV (as read by :py:class:`csv.DictReader`).
     """
     # Find the first non-empty/comment row in the CSV
-    with open(csv_filename) as f:
+    with open_utf8(csv_filename) as f:
         for first_non_empty_row, cells in enumerate(csv.reader(f)):
             if any(cell.strip() != "" and not cell.strip().startswith("#")
                    for cell in cells):
                 break
     
-    with open(csv_filename) as f:
+    with open_utf8(csv_filename) as f:
         # Skip empty/comment rows
         for _ in range(first_non_empty_row):
             f.readline()
