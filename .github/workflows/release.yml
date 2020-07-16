@@ -1,0 +1,77 @@
+name: Generate release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+    - name: Upgrade pip
+      run: |
+        python -m pip install --upgrade pip
+    - uses: actions/checkout@v2
+    - name: Build Python source package
+      id: build_source_package
+      run: |
+        python setup.py sdist
+        echo ::set-output name=package::$(echo dist/*.tar.gz)
+    - name: Install doc dependencies
+      run: |
+        python -m pip install -r requirements-docs.txt
+        sudo apt-get update -y
+        sudo apt-get install -y \
+          latexmk \
+          texlive-latex-recommended \
+          texlive-latex-extra \
+          texlive-fonts-recommended
+    - name: Build PDF documentation
+      id: build_pdf_docs
+      run: |
+        make -C docs/ latexpdf
+        echo ::set-output name=pdf::$(echo docs/build/latex/smpte*.pdf)
+        echo ::set-output name=toc::$(echo docs/build/latex/smpte*.toc)
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: ${{ github.ref }}
+        draft: false
+        prerelease: true
+    - name: Upload source package
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ steps.build_source_package.outputs.package }}
+        asset_name: ${{ github.event.repository.name }}.tar.gz
+        asset_content_type: application/gzip
+    - name: Upload PDF docs
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ steps.build_pdf_docs.outputs.pdf }}
+        asset_name: manual.pdf
+        asset_content_type: application/pdf
+    - name: Upload PDF docs TOC file
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ steps.build_pdf_docs.outputs.toc }}
+        asset_name: manual.toc
+        asset_content_type: text/plain
