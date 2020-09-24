@@ -17,7 +17,7 @@ setup(
     include_package_data=True,
     url="https://github.com/bbc/vc2_data_tables",
     author="BBC R&D",
-    description="Machine-readable constants and data tables for the SMPTE ST 2042-2 VC-2 professional video codec.",
+    description="Machine-readable constants and data tables for the SMPTE ST 2042-1 VC-2 professional video codec.",
     license="GPLv2",
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -33,7 +33,7 @@ setup(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 3",
     ],
-    keywords="smpte-RP-2042-3 vc2 dirac dirac-pro constants data-tables quantisation-matrix",
+    keywords="vc2 dirac dirac-pro constants data-tables quantisation-matrix",
     install_requires=["enum34"],
     entry_points = {
         'console_scripts': [],
