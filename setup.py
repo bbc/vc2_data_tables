@@ -34,7 +34,7 @@ setup(
         "Programming Language :: Python :: 3",
     ],
     keywords="vc2 dirac dirac-pro constants data-tables quantisation-matrix",
-    install_requires=["enum34"],
+    install_requires=["enum34; python_version < '3.4'"],
     entry_points = {
         'console_scripts': [],
     },
