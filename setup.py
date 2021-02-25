@@ -18,13 +18,13 @@ setup(
     url="https://github.com/bbc/vc2_data_tables",
     author="BBC R&D",
     description="Machine-readable constants and data tables for the SMPTE ST 2042-1 VC-2 professional video codec.",
-    license="GPLv2",
+    license="GPL-3.0-only",
     classifiers=[
         "Development Status :: 3 - Alpha",
 
         "Intended Audience :: Developers",
 
-        "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
 
         "Operating System :: POSIX :: Linux",
         "Operating System :: Microsoft :: Windows",
