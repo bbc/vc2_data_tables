@@ -23,6 +23,24 @@ To read about the Python module, see :ref:`the module API documentation <api>`.
 For an overview of the CSV formatting conventions see the :ref:`csvfiles`
 documentation.
 
+Finally, you can find the source code (and CSV data) for
+:py:mod:`vc2_data_tables` `on GitHub
+<https://github.com/bbc/vc2_data_tables/>`_.
+
+.. only:: not latex
+
+    .. note::
+    
+        This documentation is also `available in PDF format
+        <https://bbc.github.io/vc2_data_tables/vc2_data_tables_manual.pdf>`_.
+
+.. only:: not html
+
+    .. note::
+    
+        This documentation is also `available to browse online in HTML format
+        <https://bbc.github.io/vc2_data_tables/>`_.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
