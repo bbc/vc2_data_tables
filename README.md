@@ -34,7 +34,7 @@ repository](https://github.com/bbc/vc2_conformance).
 
 
 License
-=======
+-------
 
 This software is distributed under the [GNU General Public License version
 3](./LICENSE.txt), &copy; BBC 2021.
