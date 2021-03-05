@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vc2_data_tables &#8212; SMPTE ST 2042-1 (VC-2) Data Tables 0.1.5 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="The vc2_data_tables Python module" href="api.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="The vc2_data_tables Python module"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">SMPTE ST 2042-1 (VC-2) Data Tables 0.1.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">vc2_data_tables</span></code></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="vc2-data-tables">
+<h1><code class="docutils literal notranslate"><span class="pre">vc2_data_tables</span></code><a class="headerlink" href="#vc2-data-tables" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="api.html#module-vc2_data_tables" title="vc2_data_tables"><code class="xref py py-mod docutils literal notranslate"><span class="pre">vc2_data_tables</span></code></a> Python package contains machine-readable values
+for the constants and data tables in the SMPTE ST 2042-series of standards
+relating to the <a class="reference external" href="https://www.bbc.co.uk/rd/projects/vc-2">VC-2 professional video codec</a>.</p>
+<p>Specifically, the values in this package are those defined in:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ieeexplore.ieee.org/document/7967896">SMPTE ST 2042-1:2017</a> (VC-2)</p></li>
+<li><p><a class="reference external" href="https://ieeexplore.ieee.org/document/8187792">SMPTE ST 2042-2:2017</a> (VC-2 Level Definitions)</p></li>
+</ul>
+<p>These values may be used either via the <a class="reference internal" href="api.html#module-vc2_data_tables" title="vc2_data_tables"><code class="xref py py-mod docutils literal notranslate"><span class="pre">vc2_data_tables</span></code></a> Python module
+or, in most cases, values may be read from CSV formatted data files located in
+<code class="docutils literal notranslate"><span class="pre">vc2_data_tables/csv/*.csv</span></code>.</p>
+<p>To read about the Python module, see <a class="reference internal" href="api.html#api"><span class="std std-ref">the module API documentation</span></a>.</p>
+<p>For an overview of the CSV formatting conventions see the <a class="reference internal" href="csv_files.html#csvfiles"><span class="std std-ref">CSV Files and Conventions</span></a>
+documentation.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">The <code class="docutils literal notranslate"><span class="pre">vc2_data_tables</span></code> Python module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#parse-info-block">(10.5) Parse Info Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#picture-coding-mode-identifiers">(11) Picture coding mode identifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#preset-frame-rates">(11.4.6) Preset frame rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#preset-pixel-aspect-ratios">(11.4.7) Preset pixel aspect ratios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#signal-ranges">(11.4.9) Signal ranges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#color-primaries">(11.4.10.2) Color Primaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#color-matrices">(11.4.10.3) Color Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#transfer-functions">(11.4.10.4) Transfer functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#colour-specifications">(11.4.10.1) Colour specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#base-video-formats">(11.3) Base Video Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#lifting-filters">(15.4.4) Lifting filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#c-2-profiles">(C.2) Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#d-quantisation-matrices">(D) Quantisation matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#st-2042-2-levels">(ST 2042-2) Levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="csv_files.html">CSV Files and Conventions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="csv_files.html#csv-dialect">CSV Dialect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv_files.html#headings">Headings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv_files.html#comments">Comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv_files.html#ditto">Ditto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv_files.html#lists">Lists</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="next chapter">The <code class="docutils literal notranslate"><span class="pre">vc2_data_tables</span></code> Python module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="The vc2_data_tables Python module"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">SMPTE ST 2042-1 (VC-2) Data Tables 0.1.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">vc2_data_tables</span></code></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, BBC.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
+    </div>
+  </body>
+</html>

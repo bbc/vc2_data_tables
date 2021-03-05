@@ -1,0 +1,634 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The vc2_data_tables Python module &#8212; SMPTE ST 2042-1 (VC-2) Data Tables 0.1.5 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="CSV Files and Conventions" href="csv_files.html" />
+    <link rel="prev" title="vc2_data_tables" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="csv_files.html" title="CSV Files and Conventions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="vc2_data_tables"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SMPTE ST 2042-1 (VC-2) Data Tables 0.1.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">The <code class="docutils literal notranslate"><span class="pre">vc2_data_tables</span></code> Python module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-vc2_data_tables">
+<span id="the-vc2-data-tables-python-module"></span><span id="api"></span><h1>The <code class="docutils literal notranslate"><span class="pre">vc2_data_tables</span></code> Python module<a class="headerlink" href="#module-vc2_data_tables" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#module-vc2_data_tables" title="vc2_data_tables"><code class="xref py py-mod docutils literal notranslate"><span class="pre">vc2_data_tables</span></code></a> module defines a number of constants and tables
+based on values published in the SMPTE ST 2042-series of standards documents.
+References to the standard are shown in brackets and, unless otherwise stated,
+refer to SMPTE ST 2042-1:2017, the main VC-2 specification.</p>
+<p>Enumerated indices defined by the VC-2 specification (for example the parse
+codes which appear in parse info blocks (10.5.2)) are defined as
+<a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a> types (e.g. <a class="reference internal" href="#vc2_data_tables.ParseCodes" title="vc2_data_tables.ParseCodes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParseCodes</span></code></a>) with informative
+names assigned to each index. These may be used interchangeably with plain
+integer values if required or preferred.</p>
+<p>Tables of values (for example the table of preset frame rates in (Table 11.1))
+are typically represented as dictionaries (e.g. <a class="reference internal" href="#vc2_data_tables.PRESET_FRAME_RATES" title="vc2_data_tables.PRESET_FRAME_RATES"><code class="xref py py-data docutils literal notranslate"><span class="pre">PRESET_FRAME_RATES</span></code></a>).
+In these dictionaries the key is an index (e.g. <a class="reference internal" href="#vc2_data_tables.PresetFrameRates" title="vc2_data_tables.PresetFrameRates"><code class="xref py py-class docutils literal notranslate"><span class="pre">PresetFrameRates</span></code></a>)
+and the value a <a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.namedtuple" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">namedtuple()</span></code></a> (e.g. <a class="reference internal" href="#vc2_data_tables.FrameRate" title="vc2_data_tables.FrameRate"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrameRate</span></code></a>)
+giving the values for that row in the table.</p>
+<p>As an example, the snippet below looks up the frame size of the Digital Cinema
+2K base video format:</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">vc2_data_tables</span> <span class="kn">import</span> <span class="n">BaseVideoFormats</span><span class="p">,</span> <span class="n">BASE_VIDEO_FORMAT_PARAMETERS</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">BaseVideoFormats</span><span class="o">.</span><span class="n">dc2k</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span>
+<span class="go">&lt;BaseVideoFormats.dc2k: 15&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># The named enumerated types are optional and completely interchangeable</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># with normal integer values, e.g.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">==</span> <span class="mi">15</span>
+<span class="go">True</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Data tables are usually looked up by index (either integers or named</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># values may be used)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">BASE_VIDEO_FORMAT_PARAMETERS</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">frame_width</span>
+<span class="go">2048</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="o">.</span><span class="n">frame_height</span>
+<span class="go">1080</span>
+</pre></div>
+</div>
+<div class="section" id="parse-info-block">
+<h2>(10.5) Parse Info Block<a class="headerlink" href="#parse-info-block" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="vc2_data_tables.PARSE_INFO_PREFIX">
+<code class="sig-name descname"><span class="pre">PARSE_INFO_PREFIX</span></code><em class="property"> <span class="pre">=</span> <span class="pre">int</span></em><a class="headerlink" href="#vc2_data_tables.PARSE_INFO_PREFIX" title="Permalink to this definition">¶</a></dt>
+<dd><p>(10.5.1) The ‘magic bytes’ used to identify the start of a parse info header.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="vc2_data_tables.PARSE_INFO_HEADER_BYTES">
+<code class="sig-name descname"><span class="pre">PARSE_INFO_HEADER_BYTES</span></code><em class="property"> <span class="pre">=</span> <span class="pre">int</span></em><a class="headerlink" href="#vc2_data_tables.PARSE_INFO_HEADER_BYTES" title="Permalink to this definition">¶</a></dt>
+<dd><p>(10.5.1) The number of bytes in the parse_info header.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.ParseCodes">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">ParseCodes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntEnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.ParseCodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>(10.5.2) Valid parse_code values from (Table 10.1). Names are not normative.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="picture-coding-mode-identifiers">
+<h2>(11) Picture coding mode identifiers<a class="headerlink" href="#picture-coding-mode-identifiers" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="vc2_data_tables.PictureCodingModes">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">PictureCodingModes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntEnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.PictureCodingModes" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.5) Indices defined in the text. Names are not normative.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.ColorDifferenceSamplingFormats">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">ColorDifferenceSamplingFormats</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntEnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.ColorDifferenceSamplingFormats" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.4) Indices from (Table 11.2)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.SourceSamplingModes">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">SourceSamplingModes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntEnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.SourceSamplingModes" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.5) Indices defined in the text. Names are not normative.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="preset-frame-rates">
+<h2>(11.4.6) Preset frame rates<a class="headerlink" href="#preset-frame-rates" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="vc2_data_tables.PRESET_FRAME_RATES">
+<code class="sig-name descname"><span class="pre">PRESET_FRAME_RATES</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{PresetFrameRates:</span> <span class="pre">FrameRate,</span> <span class="pre">...}</span></em><a class="headerlink" href="#vc2_data_tables.PRESET_FRAME_RATES" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.6) Frame-rate presets from (Table 11.3). Lookup from
+<a class="reference internal" href="#vc2_data_tables.PresetFrameRates" title="vc2_data_tables.PresetFrameRates"><code class="xref py py-class docutils literal notranslate"><span class="pre">PresetFrameRates</span></code></a> to <a class="reference internal" href="#vc2_data_tables.FrameRate" title="vc2_data_tables.FrameRate"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrameRate</span></code></a> tuples.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.PresetFrameRates">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">PresetFrameRates</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntEnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.PresetFrameRates" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.6) Preset framerate indices from (Table 11.1).</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.FrameRate">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">FrameRate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numerator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">denominator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.FrameRate" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.6) A frame rate numerator and denominator value from (Table 11.1).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>numerator</strong><span class="classifier">int</span></dt><dd></dd>
+<dt><strong>denominator</strong><span class="classifier">int</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="preset-pixel-aspect-ratios">
+<h2>(11.4.7) Preset pixel aspect ratios<a class="headerlink" href="#preset-pixel-aspect-ratios" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="vc2_data_tables.PRESET_PIXEL_ASPECT_RATIOS">
+<code class="sig-name descname"><span class="pre">PRESET_PIXEL_ASPECT_RATIOS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{PresetPixelAspectRatios:</span> <span class="pre">PixelAspectRatio,</span> <span class="pre">...}</span></em><a class="headerlink" href="#vc2_data_tables.PRESET_PIXEL_ASPECT_RATIOS" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.7) Pixel aspect ratio presets from (Table 11.4). Lookup from
+<a class="reference internal" href="#vc2_data_tables.PresetPixelAspectRatios" title="vc2_data_tables.PresetPixelAspectRatios"><code class="xref py py-class docutils literal notranslate"><span class="pre">PresetPixelAspectRatios</span></code></a> to <a class="reference internal" href="#vc2_data_tables.PixelAspectRatio" title="vc2_data_tables.PixelAspectRatio"><code class="xref py py-class docutils literal notranslate"><span class="pre">PixelAspectRatio</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.PresetPixelAspectRatios">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">PresetPixelAspectRatios</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntEnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.PresetPixelAspectRatios" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.7) Pixel aspect ratio preset indices from (Table 11.4).</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.PixelAspectRatio">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">PixelAspectRatio</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numerator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">denominator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.PixelAspectRatio" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.7) Pixel aspect ratio preset indices from (Table 11.4).</p>
+</dd></dl>
+
+</div>
+<div class="section" id="signal-ranges">
+<h2>(11.4.9) Signal ranges<a class="headerlink" href="#signal-ranges" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="vc2_data_tables.PRESET_SIGNAL_RANGES">
+<code class="sig-name descname"><span class="pre">PRESET_SIGNAL_RANGES</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{PresetSignalRanges:</span> <span class="pre">SignalRangeParameters,</span> <span class="pre">...}</span></em><a class="headerlink" href="#vc2_data_tables.PRESET_SIGNAL_RANGES" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.9) Signal offsets/ranges presets from (Table 11.5). Lookup from
+<a class="reference internal" href="#vc2_data_tables.PresetSignalRanges" title="vc2_data_tables.PresetSignalRanges"><code class="xref py py-class docutils literal notranslate"><span class="pre">PresetSignalRanges</span></code></a> to <a class="reference internal" href="#vc2_data_tables.SignalRangeParameters" title="vc2_data_tables.SignalRangeParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">SignalRangeParameters</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.PresetSignalRanges">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">PresetSignalRanges</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntEnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.PresetSignalRanges" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.9) Signal offsets/ranges preset indices from (Table 11.5).</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.SignalRangeParameters">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">SignalRangeParameters</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">luma_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">luma_excursion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_diff_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_diff_excursion</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.SignalRangeParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>An entry in (Table 11.5).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>luma_offset</strong></dt><dd><p>The luma value corresponding with 0.</p>
+</dd>
+<dt><strong>luma_excursion</strong></dt><dd><p>The maximum value of an offset luma value.</p>
+</dd>
+<dt><strong>color_diff_offset</strong></dt><dd><p>The color difference value corresponding with 0.</p>
+</dd>
+<dt><strong>color_diff_excursion</strong></dt><dd><p>The maximum value of an offset color difference value.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="color-primaries">
+<h2>(11.4.10.2) Color Primaries<a class="headerlink" href="#color-primaries" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="vc2_data_tables.PRESET_COLOR_PRIMARIES">
+<code class="sig-name descname"><span class="pre">PRESET_COLOR_PRIMARIES</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{PresetColorPrimaries:</span> <span class="pre">ColorPrimariesParameters,</span> <span class="pre">...}</span></em><a class="headerlink" href="#vc2_data_tables.PRESET_COLOR_PRIMARIES" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.10.2) Normative specification names for color primaries from (Table
+11.7). Lookup from <a class="reference internal" href="#vc2_data_tables.PresetColorPrimaries" title="vc2_data_tables.PresetColorPrimaries"><code class="xref py py-class docutils literal notranslate"><span class="pre">PresetColorPrimaries</span></code></a> to
+<a class="reference internal" href="#vc2_data_tables.ColorPrimariesParameters" title="vc2_data_tables.ColorPrimariesParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorPrimariesParameters</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.PresetColorPrimaries">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">PresetColorPrimaries</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntEnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.PresetColorPrimaries" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.10.2) Color primaries from (Table 11.7).</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.ColorPrimariesParameters">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">ColorPrimariesParameters</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specification</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.ColorPrimariesParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.10.2) A color primaries description.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong></dt><dd><p>Informative name.</p>
+</dd>
+<dt><strong>specification</strong><span class="classifier">str</span></dt><dd><p>The name of the specification defining the primaries in use.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="color-matrices">
+<h2>(11.4.10.3) Color Matrices<a class="headerlink" href="#color-matrices" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="vc2_data_tables.PRESET_COLOR_MATRICES">
+<code class="sig-name descname"><span class="pre">PRESET_COLOR_MATRICES</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{PresetColorMatrices:</span> <span class="pre">PresetColorMatrices,</span> <span class="pre">...}</span></em><a class="headerlink" href="#vc2_data_tables.PRESET_COLOR_MATRICES" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.10.3) Color matrices from (Table 11.8). Lookup from
+<a class="reference internal" href="#vc2_data_tables.PresetColorMatrices" title="vc2_data_tables.PresetColorMatrices"><code class="xref py py-class docutils literal notranslate"><span class="pre">PresetColorMatrices</span></code></a> <a class="reference internal" href="#vc2_data_tables.ColorMatrixParameters" title="vc2_data_tables.ColorMatrixParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorMatrixParameters</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.PresetColorMatrices">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">PresetColorMatrices</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntEnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.PresetColorMatrices" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.10.3) Color matrices from (Table 11.8).</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.ColorMatrixParameters">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">ColorMatrixParameters</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specification</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_matrix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.ColorMatrixParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>An entry in (Table 11.8)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong></dt><dd><p>Informative name.</p>
+</dd>
+<dt><strong>specification</strong></dt><dd><p>Normative specification name.</p>
+</dd>
+<dt><strong>color_matrix</strong></dt><dd><p>Normative color matrix description.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="transfer-functions">
+<h2>(11.4.10.4) Transfer functions<a class="headerlink" href="#transfer-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="vc2_data_tables.PRESET_TRANSFER_FUNCTIONS">
+<code class="sig-name descname"><span class="pre">PRESET_TRANSFER_FUNCTIONS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{PresetTransferFunctions:</span> <span class="pre">TransferFunctionParameters,</span> <span class="pre">...}</span></em><a class="headerlink" href="#vc2_data_tables.PRESET_TRANSFER_FUNCTIONS" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.10.3) Color matrices from (Table 11.8). Lookup from
+<a class="reference internal" href="#vc2_data_tables.PresetTransferFunctions" title="vc2_data_tables.PresetTransferFunctions"><code class="xref py py-class docutils literal notranslate"><span class="pre">PresetTransferFunctions</span></code></a> to <a class="reference internal" href="#vc2_data_tables.TransferFunctionParameters" title="vc2_data_tables.TransferFunctionParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransferFunctionParameters</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.PresetTransferFunctions">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">PresetTransferFunctions</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntEnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.PresetTransferFunctions" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.10.4) Transfer functions from (Table 11.9).</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.TransferFunctionParameters">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">TransferFunctionParameters</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specification</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.TransferFunctionParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>An entry in (Table 11.9)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong></dt><dd><p>Informative name.</p>
+</dd>
+<dt><strong>specification</strong></dt><dd><p>Normative specification name.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="colour-specifications">
+<h2>(11.4.10.1) Colour specifications<a class="headerlink" href="#colour-specifications" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="vc2_data_tables.PRESET_COLOR_SPECS">
+<code class="sig-name descname"><span class="pre">PRESET_COLOR_SPECS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{PresetColorSpecs:</span> <span class="pre">ColorSpecificiation,</span> <span class="pre">...}</span></em><a class="headerlink" href="#vc2_data_tables.PRESET_COLOR_SPECS" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.10.3) Color matrices from (Table 11.8). Lookup from
+<a class="reference internal" href="#vc2_data_tables.PresetColorSpecs" title="vc2_data_tables.PresetColorSpecs"><code class="xref py py-class docutils literal notranslate"><span class="pre">PresetColorSpecs</span></code></a> to <a class="reference internal" href="#vc2_data_tables.ColorSpecificiation" title="vc2_data_tables.ColorSpecificiation"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorSpecificiation</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.PresetColorSpecs">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">PresetColorSpecs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntEnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.PresetColorSpecs" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.4.10.1) Preset color specification collections from (Table 11.6).</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.ColorSpecificiation">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">ColorSpecificiation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color_primaries_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_matrix_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transfer_function_index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.ColorSpecificiation" title="Permalink to this definition">¶</a></dt>
+<dd><p>An entry in (Table 11.6)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>color_primaries</strong></dt><dd><p>A <a class="reference internal" href="#vc2_data_tables.PresetColorPrimaries" title="vc2_data_tables.PresetColorPrimaries"><code class="xref py py-class docutils literal notranslate"><span class="pre">PresetColorPrimaries</span></code></a> index.</p>
+</dd>
+<dt><strong>color_matrix</strong></dt><dd><p>A <a class="reference internal" href="#vc2_data_tables.PresetColorMatrices" title="vc2_data_tables.PresetColorMatrices"><code class="xref py py-class docutils literal notranslate"><span class="pre">PresetColorMatrices</span></code></a> index.</p>
+</dd>
+<dt><strong>transfer_function</strong></dt><dd><p>A <a class="reference internal" href="#vc2_data_tables.PresetTransferFunctions" title="vc2_data_tables.PresetTransferFunctions"><code class="xref py py-class docutils literal notranslate"><span class="pre">PresetTransferFunctions</span></code></a> index.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="base-video-formats">
+<h2>(11.3) Base Video Formats<a class="headerlink" href="#base-video-formats" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="vc2_data_tables.BASE_VIDEO_FORMAT_PARAMETERS">
+<code class="sig-name descname"><span class="pre">BASE_VIDEO_FORMAT_PARAMETERS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{BaseVideoFormats:</span> <span class="pre">BaseVideoFormatParameters,</span> <span class="pre">...}</span></em><a class="headerlink" href="#vc2_data_tables.BASE_VIDEO_FORMAT_PARAMETERS" title="Permalink to this definition">¶</a></dt>
+<dd><p>(B) Base video format specifications from (Table B.1a, B.1b, B.1c). Lookup from
+<a class="reference internal" href="#vc2_data_tables.BaseVideoFormats" title="vc2_data_tables.BaseVideoFormats"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseVideoFormats</span></code></a> to <a class="reference internal" href="#vc2_data_tables.BaseVideoFormatParameters" title="vc2_data_tables.BaseVideoFormatParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseVideoFormatParameters</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.BaseVideoFormats">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">BaseVideoFormats</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntEnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.BaseVideoFormats" title="Permalink to this definition">¶</a></dt>
+<dd><p>(11.3) Base video format indices from (Table 11.1).</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.BaseVideoFormatParameters">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">BaseVideoFormatParameters</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_diff_format_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_sampling</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_field_first</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_rate_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixel_aspect_ratio_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_range_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_spec_index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.BaseVideoFormatParameters" title="Permalink to this definition">¶</a></dt>
+<dd><ol class="upperalpha simple" start="2">
+<li><p>An entry in (Table B.1a, B.1b or B.1c)</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>frame_width</strong></dt><dd></dd>
+<dt><strong>frame_height</strong></dt><dd></dd>
+<dt><strong>color_diff_format_index</strong></dt><dd><p>An entry from the enum <a class="reference internal" href="#vc2_data_tables.ColorDifferenceSamplingFormats" title="vc2_data_tables.ColorDifferenceSamplingFormats"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorDifferenceSamplingFormats</span></code></a>. Listed
+as ‘color difference sampling format’ in (Table B.1).</p>
+</dd>
+<dt><strong>source_sampling</strong></dt><dd><p>An entry from the enum <a class="reference internal" href="#vc2_data_tables.SourceSamplingModes" title="vc2_data_tables.SourceSamplingModes"><code class="xref py py-class docutils literal notranslate"><span class="pre">SourceSamplingModes</span></code></a>. Specifies
+progressive or interlaced.</p>
+</dd>
+<dt><strong>top_field_first</strong></dt><dd><p>If True, the top-line of the frame is in the first field.</p>
+</dd>
+<dt><strong>frame_rate_index</strong></dt><dd><p>The frame rate, one of the indices of PRESET_FRAME_RATES.</p>
+</dd>
+<dt><strong>pixel_aspect_ratio_index</strong></dt><dd><p>The pixel aspect ratio, an entry from the enum <a class="reference internal" href="#vc2_data_tables.PresetPixelAspectRatios" title="vc2_data_tables.PresetPixelAspectRatios"><code class="xref py py-class docutils literal notranslate"><span class="pre">PresetPixelAspectRatios</span></code></a>.</p>
+</dd>
+<dt><strong>clean_width</strong></dt><dd></dd>
+<dt><strong>clean_height</strong></dt><dd></dd>
+<dt><strong>left_offset</strong></dt><dd></dd>
+<dt><strong>top_offset</strong></dt><dd><p>The clean area of the pictures. See (11.4.8) and (E.4.2).</p>
+</dd>
+<dt><strong>signal_range_index</strong></dt><dd><p>The signal ranges, an entry from the enum <a class="reference internal" href="#vc2_data_tables.PresetSignalRanges" title="vc2_data_tables.PresetSignalRanges"><code class="xref py py-class docutils literal notranslate"><span class="pre">PresetSignalRanges</span></code></a>.</p>
+</dd>
+<dt><strong>color_spec_index</strong></dt><dd><p>The color specification, an entry from the enum <a class="reference internal" href="#vc2_data_tables.PresetColorSpecs" title="vc2_data_tables.PresetColorSpecs"><code class="xref py py-class docutils literal notranslate"><span class="pre">PresetColorSpecs</span></code></a>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="lifting-filters">
+<h2>(15.4.4) Lifting filters<a class="headerlink" href="#lifting-filters" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="vc2_data_tables.LIFTING_FILTERS">
+<code class="sig-name descname"><span class="pre">LIFTING_FILTERS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{WaveletFilters:</span> <span class="pre">LiftingFilterParameters,</span> <span class="pre">...}</span></em><a class="headerlink" href="#vc2_data_tables.LIFTING_FILTERS" title="Permalink to this definition">¶</a></dt>
+<dd><p>(15.4.4.3) Filter definitions taken from (Table 15.1 to 15.6). Lookup from
+<a class="reference internal" href="#vc2_data_tables.WaveletFilters" title="vc2_data_tables.WaveletFilters"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveletFilters</span></code></a> to <a class="reference internal" href="#vc2_data_tables.LiftingFilterParameters" title="vc2_data_tables.LiftingFilterParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">LiftingFilterParameters</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.WaveletFilters">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">WaveletFilters</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntEnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.WaveletFilters" title="Permalink to this definition">¶</a></dt>
+<dd><p>(12.4.2) Wavelet filter type indices from (Table 12.1). Names are based on
+the informative names in the table.</p>
+<p>See also: <a class="reference internal" href="#vc2_data_tables.LIFTING_FILTERS" title="vc2_data_tables.LIFTING_FILTERS"><code class="xref py py-data docutils literal notranslate"><span class="pre">LIFTING_FILTERS</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.LiftingFilterParameters">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">LiftingFilterParameters</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter_bit_shift</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stages</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.LiftingFilterParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>(15.4.4.3) The generic container for the details described by (Table 15.1
+to 15.6).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>filter_bit_shift</strong></dt><dd><p>Right-shift to apply after synthesis (or before analysis).</p>
+</dd>
+<dt><strong>stages</strong></dt><dd><p>A list of LiftingStage objects to be used in sequence to perform synthesis
+with this filter.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.LiftingStage">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">LiftingStage</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lift_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taps</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.LiftingStage" title="Permalink to this definition">¶</a></dt>
+<dd><p>(15.4.4.1) Definition of a lifting stage/operation in a lifting filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>lift_type</strong></dt><dd><p>Specifies which lifting filtering operation is taking place. One
+of the indices from the LiftingFilterTypes enumeration.</p>
+</dd>
+<dt><strong>S</strong></dt><dd><p>Scale factor (right-shift applied to weighted sum)</p>
+</dd>
+<dt><strong>L</strong></dt><dd><p>Length of filter.</p>
+</dd>
+<dt><strong>D</strong></dt><dd><p>Offset of filter.</p>
+</dd>
+<dt><strong>taps</strong></dt><dd><p>An array of integers defining the filter coefficients.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.LiftingFilterTypes">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">LiftingFilterTypes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntEnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.LiftingFilterTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>(15.4.4.1) Indices of lifting filter step types. Names are informative and
+based on an interpretation of the pseudo-code in the specification.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="c-2-profiles">
+<h2>(C.2) Profiles<a class="headerlink" href="#c-2-profiles" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="vc2_data_tables.PROFILES">
+<code class="sig-name descname"><span class="pre">PROFILES</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{Profiles:</span> <span class="pre">ProfileParameters,</span> <span class="pre">...}</span></em><a class="headerlink" href="#vc2_data_tables.PROFILES" title="Permalink to this definition">¶</a></dt>
+<dd><p>The list of supported profiles from (C.2). Lookup from <a class="reference internal" href="#vc2_data_tables.Profiles" title="vc2_data_tables.Profiles"><code class="xref py py-class docutils literal notranslate"><span class="pre">Profiles</span></code></a> to
+<a class="reference internal" href="#vc2_data_tables.ProfileParameters" title="vc2_data_tables.ProfileParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProfileParameters</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.Profiles">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">Profiles</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntEnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.Profiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>(C.2) VC-2 profile identifiers.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.ProfileParameters">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">ProfileParameters</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">allowed_parse_codes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.ProfileParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>(C.2) Parameters describing a profile specification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>allowed_parse_codes</strong></dt><dd><p>A list of supported data units. A list of values from the ParseCodes enum.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="d-quantisation-matrices">
+<h2>(D) Quantisation matrices<a class="headerlink" href="#d-quantisation-matrices" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="vc2_data_tables.QUANTISATION_MATRICES">
+<code class="sig-name descname"><span class="pre">QUANTISATION_MATRICES</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{(wavelet_index,</span> <span class="pre">wavelet_index_ho,</span> <span class="pre">dwt_depth,</span> <span class="pre">dwt_depth_ho):</span> <span class="pre">quantisation_matrix,</span> <span class="pre">...}</span></em><a class="headerlink" href="#vc2_data_tables.QUANTISATION_MATRICES" title="Permalink to this definition">¶</a></dt>
+<dd><p>The preset quantisation matrices from (Table D.1) to (Table D.8)</p>
+<p>The loaded matrices are stored in a nested dictionary with the following
+layout:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">QUANTISATION_MATRICES</span><span class="p">[(</span><span class="n">wavelet_index</span><span class="p">,</span> <span class="n">wavelet_index_ho</span><span class="p">,</span> <span class="n">dwt_depth</span><span class="p">,</span> <span class="n">dwt_depth_ho</span><span class="p">)][</span><span class="n">level</span><span class="p">][</span><span class="n">orientation</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">wavelet_index</span></code> and <code class="docutils literal notranslate"><span class="pre">wavelet_index_ho</span></code> are <a class="reference internal" href="#vc2_data_tables.WaveletFilters" title="vc2_data_tables.WaveletFilters"><code class="xref py py-class docutils literal notranslate"><span class="pre">WaveletFilters</span></code></a>
+values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dwt_depth</span></code> and <code class="docutils literal notranslate"><span class="pre">dwt_depth_ho</span></code> are transform depths (integers)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code> is the transform level (integer)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">orientation</span></code> is one of <cite>“L”</cite>, <cite>“H”</cite>, <cite>“LL”`</cite>, <cite>“HL”`</cite>, <cite>“LH”`</cite> or <cite>“HH”`</cite></p></li>
+</ul>
+</dd></dl>
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The values in these tables correspond to those published in SMPTE ST
+2042-1:2017. Consequently, errors in the quantisation matrices for the
+‘Fidelity’ filter are repeated here.</p>
+</div>
+</div>
+<div class="section" id="st-2042-2-levels">
+<h2>(ST 2042-2) Levels<a class="headerlink" href="#st-2042-2-levels" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="vc2_data_tables.LEVELS">
+<code class="sig-name descname"><span class="pre">LEVELS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{Levels:</span> <span class="pre">LevelParameters,</span> <span class="pre">...}</span></em><a class="headerlink" href="#vc2_data_tables.LEVELS" title="Permalink to this definition">¶</a></dt>
+<dd><p>The list of supported levels from (ST 2042-2:2017: 5.2). A lookup from
+<a class="reference internal" href="#vc2_data_tables.Levels" title="vc2_data_tables.Levels"><code class="xref py py-class docutils literal notranslate"><span class="pre">Levels</span></code></a> to <a class="reference internal" href="#vc2_data_tables.LevelParameters" title="vc2_data_tables.LevelParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">LevelParameters</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.Levels">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">Levels</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntEnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.Levels" title="Permalink to this definition">¶</a></dt>
+<dd><p>(ST 2042-2:2017: 5.2) VC-2 level identifiers.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="vc2_data_tables.LevelParameters">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">LevelParameters</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">standard</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vc2_data_tables.LevelParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>(ST 2042-2) Parameters describing a level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>standard</strong><span class="classifier">str</span></dt><dd><p>Name of the standards document which defines the level.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The <code class="docutils literal notranslate"><span class="pre">vc2_data_tables</span></code> Python module</a><ul>
+<li><a class="reference internal" href="#parse-info-block">(10.5) Parse Info Block</a></li>
+<li><a class="reference internal" href="#picture-coding-mode-identifiers">(11) Picture coding mode identifiers</a></li>
+<li><a class="reference internal" href="#preset-frame-rates">(11.4.6) Preset frame rates</a></li>
+<li><a class="reference internal" href="#preset-pixel-aspect-ratios">(11.4.7) Preset pixel aspect ratios</a></li>
+<li><a class="reference internal" href="#signal-ranges">(11.4.9) Signal ranges</a></li>
+<li><a class="reference internal" href="#color-primaries">(11.4.10.2) Color Primaries</a></li>
+<li><a class="reference internal" href="#color-matrices">(11.4.10.3) Color Matrices</a></li>
+<li><a class="reference internal" href="#transfer-functions">(11.4.10.4) Transfer functions</a></li>
+<li><a class="reference internal" href="#colour-specifications">(11.4.10.1) Colour specifications</a></li>
+<li><a class="reference internal" href="#base-video-formats">(11.3) Base Video Formats</a></li>
+<li><a class="reference internal" href="#lifting-filters">(15.4.4) Lifting filters</a></li>
+<li><a class="reference internal" href="#c-2-profiles">(C.2) Profiles</a></li>
+<li><a class="reference internal" href="#d-quantisation-matrices">(D) Quantisation matrices</a></li>
+<li><a class="reference internal" href="#st-2042-2-levels">(ST 2042-2) Levels</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">vc2_data_tables</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="csv_files.html"
+                        title="next chapter">CSV Files and Conventions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="csv_files.html" title="CSV Files and Conventions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="vc2_data_tables"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SMPTE ST 2042-1 (VC-2) Data Tables 0.1.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">The <code class="docutils literal notranslate"><span class="pre">vc2_data_tables</span></code> Python module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, BBC.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
+    </div>
+  </body>
+</html>

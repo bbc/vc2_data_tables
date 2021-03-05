@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSV Files and Conventions &#8212; SMPTE ST 2042-1 (VC-2) Data Tables 0.1.5 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="The vc2_data_tables Python module" href="api.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="The vc2_data_tables Python module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SMPTE ST 2042-1 (VC-2) Data Tables 0.1.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">CSV Files and Conventions</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="csv-files-and-conventions">
+<span id="csvfiles"></span><h1>CSV Files and Conventions<a class="headerlink" href="#csv-files-and-conventions" title="Permalink to this headline">¶</a></h1>
+<p>Many of the data tables exposed by this Python module are read from CSV files
+contained in <code class="docutils literal notranslate"><span class="pre">vc2_data_tables/csv/*.csv</span></code>. You are free to use these files
+directly rather than via the <a class="reference internal" href="api.html#module-vc2_data_tables" title="vc2_data_tables"><code class="xref py py-mod docutils literal notranslate"><span class="pre">vc2_data_tables</span></code></a> module.</p>
+<p>In general, the CSV files mimic the format which appears in the VC-2 standards
+documents and can be opened in common spreadsheet packages and are intended to
+be relatively human-readable.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>After opening the CSV files included with this module with a spreadsheet
+package it is often helpful to reset the width of all columns to a fixed
+size. This is because may files will contain comments which cause certain
+columns to be assigned very large sizes (see section about comments below).</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Take care when modifying these CSV files some spreadsheet packages contain
+unhelpful ‘smart’ features which can mangle cells containing values
+matching certain formats (e.g. anything which looks like a date). Also
+watch out for trailing spaces in cells.</p>
+</div>
+<p>The sections below define the specific conventions used by the CSV files in
+this package.</p>
+<div class="section" id="csv-dialect">
+<h2>CSV Dialect<a class="headerlink" href="#csv-dialect" title="Permalink to this headline">¶</a></h2>
+<p>The CSV provided use the Microsoft Excel CSV dialect and are encoded using
+UTF-8. See Python’s <a class="reference external" href="https://docs.python.org/3/library/csv.html#module-csv" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">csv</span></code></a> module for more background on CSV formatting
+dialects.</p>
+</div>
+<div class="section" id="headings">
+<h2>Headings<a class="headerlink" href="#headings" title="Permalink to this headline">¶</a></h2>
+<p>In all CSV files, the first non-empty/comment row contains headings for the
+values beneath. The meanings of each column should be self-explantory, but
+further hints may be given in the <a class="reference internal" href="api.html#module-vc2_data_tables" title="vc2_data_tables"><code class="xref py py-mod docutils literal notranslate"><span class="pre">vc2_data_tables</span></code></a> API documentation
+associated with each table.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <a class="reference internal" href="api.html#module-vc2_data_tables" title="vc2_data_tables"><code class="xref py py-mod docutils literal notranslate"><span class="pre">vc2_data_tables</span></code></a> software expects certain column names to be
+used but is insensitive to column order and will ignore any unexpected
+extra columns.</p>
+</div>
+</div>
+<div class="section" id="comments">
+<h2>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
+<p>To aid human consumption of the CSV data files, human-readable comments are
+used. All rows in a CSV file containing only empty cells or cells whose values
+start with a hash (<code class="docutils literal notranslate"><span class="pre">#</span></code>) character should be considered to be comments and
+omitted.</p>
+<p>The following illustrates how comments may be used in a CSV.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 34%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Not</p></td>
+<td><p>a</p></td>
+<td><p>comment!</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p># A comment</p></td>
+<td><p># Another comment</p></td>
+</tr>
+<tr class="row-odd"><td><p>Not</p></td>
+<td><p>a</p></td>
+<td><p>comment!</p></td>
+</tr>
+<tr class="row-even"><td><p>123</p></td>
+<td><p>abc</p></td>
+<td><p># <em>Not</em> a comment</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A cell starting with a hash (<code class="docutils literal notranslate"><span class="pre">#</span></code>) on a row which contains data is <em>not</em> a
+comment (see final row of the example above). Comments may only occur on
+rows which otherwise do not contain data.</p>
+</div>
+</div>
+<div class="section" id="ditto">
+<h2>Ditto<a class="headerlink" href="#ditto" title="Permalink to this headline">¶</a></h2>
+<p>In some tables, values from previous rows may be repeated using ‘ditto’,
+written as <code class="docutils literal notranslate"><span class="pre">&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">''</span></code>. For example:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 44%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Number</p></th>
+<th class="head"><p>Above 3?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>“</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>“</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>“</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>“</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Excel and other spreadsheet packages often replace ‘straight’ quote
+characters with their ‘curly’ unicode variants. Take care when manually
+parsing CSV files containing ditto to also handle these variants.</p>
+</div>
+</div>
+<div class="section" id="lists">
+<h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
+<p>Occasionally table cells may contain a comma separated list of values. These
+commas are escaped according to the Excel CSV convention of enclosing the whole
+cell value in double quotes.</p>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">CSV Files and Conventions</a><ul>
+<li><a class="reference internal" href="#csv-dialect">CSV Dialect</a></li>
+<li><a class="reference internal" href="#headings">Headings</a></li>
+<li><a class="reference internal" href="#comments">Comments</a></li>
+<li><a class="reference internal" href="#ditto">Ditto</a></li>
+<li><a class="reference internal" href="#lists">Lists</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="previous chapter">The <code class="docutils literal notranslate"><span class="pre">vc2_data_tables</span></code> Python module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/csv_files.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="The vc2_data_tables Python module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SMPTE ST 2042-1 (VC-2) Data Tables 0.1.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">CSV Files and Conventions</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, BBC.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
+    </div>
+  </body>
+</html>
