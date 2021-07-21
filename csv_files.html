@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CSV Files and Conventions &#8212; SMPTE ST 2042-1 (VC-2) Data Tables 1.0.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>CSV Files and Conventions &#8212; SMPTE ST 2042-1 (VC-2) Data Tables 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -28,7 +29,7 @@
         <li class="right" >
           <a href="api.html" title="The vc2_data_tables Python module"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">SMPTE ST 2042-1 (VC-2) Data Tables 1.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SMPTE ST 2042-1 (VC-2) Data Tables 2.0.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">CSV Files and Conventions</a></li> 
       </ul>
     </div>  
@@ -38,7 +39,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="csv-files-and-conventions">
+  <section id="csv-files-and-conventions">
 <span id="csvfiles"></span><h1>CSV Files and Conventions<a class="headerlink" href="#csv-files-and-conventions" title="Permalink to this headline">¶</a></h1>
 <p>Many of the data tables exposed by this Python module are read from CSV files
 contained in <code class="docutils literal notranslate"><span class="pre">vc2_data_tables/csv/*.csv</span></code>. You are free to use these files
@@ -62,13 +63,13 @@ watch out for trailing spaces in cells.</p>
 </div>
 <p>The sections below define the specific conventions used by the CSV files in
 this package.</p>
-<div class="section" id="csv-dialect">
+<section id="csv-dialect">
 <h2>CSV Dialect<a class="headerlink" href="#csv-dialect" title="Permalink to this headline">¶</a></h2>
 <p>The CSV provided use the Microsoft Excel CSV dialect and are encoded using
 UTF-8. See Python’s <a class="reference external" href="https://docs.python.org/3/library/csv.html#module-csv" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">csv</span></code></a> module for more background on CSV formatting
 dialects.</p>
-</div>
-<div class="section" id="headings">
+</section>
+<section id="headings">
 <h2>Headings<a class="headerlink" href="#headings" title="Permalink to this headline">¶</a></h2>
 <p>In all CSV files, the first non-empty/comment row contains headings for the
 values beneath. The meanings of each column should be self-explantory, but
@@ -80,8 +81,8 @@ associated with each table.</p>
 used but is insensitive to column order and will ignore any unexpected
 extra columns.</p>
 </div>
-</div>
-<div class="section" id="comments">
+</section>
+<section id="comments">
 <h2>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
 <p>To aid human consumption of the CSV data files, human-readable comments are
 used. All rows in a CSV file containing only empty cells or cells whose values
@@ -119,8 +120,8 @@ omitted.</p>
 comment (see final row of the example above). Comments may only occur on
 rows which otherwise do not contain data.</p>
 </div>
-</div>
-<div class="section" id="ditto">
+</section>
+<section id="ditto">
 <h2>Ditto<a class="headerlink" href="#ditto" title="Permalink to this headline">¶</a></h2>
 <p>In some tables, values from previous rows may be repeated using ‘ditto’,
 written as <code class="docutils literal notranslate"><span class="pre">&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">''</span></code>. For example:</p>
@@ -161,14 +162,14 @@ written as <code class="docutils literal notranslate"><span class="pre">&quot;</
 characters with their ‘curly’ unicode variants. Take care when manually
 parsing CSV files containing ditto to also handle these variants.</p>
 </div>
-</div>
-<div class="section" id="lists">
+</section>
+<section id="lists">
 <h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
 <p>Occasionally table cells may contain a comma separated list of values. These
 commas are escaped according to the Excel CSV convention of enclosing the whole
 cell value in double quotes.</p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -203,7 +204,7 @@ cell value in double quotes.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -225,13 +226,13 @@ cell value in double quotes.</p>
         <li class="right" >
           <a href="api.html" title="The vc2_data_tables Python module"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">SMPTE ST 2042-1 (VC-2) Data Tables 1.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SMPTE ST 2042-1 (VC-2) Data Tables 2.0.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">CSV Files and Conventions</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, BBC.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.1.
     </div>
   </body>
 </html>
