@@ -5,7 +5,7 @@ index,name,color_primaries_index,color_matrix_index,transfer_function_index
 1,sdtv_525,sdtv_525,sdtv,tv_gamma
 2,sdtv_625,sdtv_625,sdtv,tv_gamma
 3,hdtv,hdtv,hdtv,tv_gamma
-4,d_cinema,d_cinema,reversible,d_cinema
+4,d_cinema,d_cinema,identity,d_cinema
 5,uhdtv,uhdtv,uhdtv,tv_gamma
 6,hdrtv_pq,uhdtv,uhdtv,perceptual_quantizer
 7,hdrtv_hlg,uhdtv,uhdtv,hybrid_log_gamma
